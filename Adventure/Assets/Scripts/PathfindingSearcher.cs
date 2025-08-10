@@ -17,7 +17,7 @@ public class PathfindingSearcher
 
     public int ForNoEternity = 150;
 
-    public void SetAllValues(Vector2 startPosition, Vector2 endPosition)
+    public List<Cell> SetAllValues(Vector2 startPosition, Vector2 endPosition)
     {
         int counter = 0;
 
@@ -35,11 +35,9 @@ public class PathfindingSearcher
 
         while (currentPathCell.Position != endPosition)
         {
-
-
             var cellsAround = GetCellsAround(currentPathCell.Position);
 
-            foreach (var item in SettedCells)
+            foreach (var item in AlreadyChecked)
             {
                 if (cellsAround.Contains(item))
                     cellsAround.Remove(item);
@@ -47,22 +45,23 @@ public class PathfindingSearcher
 
             RemoveAllObstacles(ref cellsAround);
 
+            if (AlreadyChecked.Count == SettedCells.Count && cellsAround.Count == 0)
+            {
+                return null;
+            }
+
 
             foreach (var cell in cellsAround)
             {
-                /*if(cell.PathfindingCell.IsObstacle)
-                {
-                    SettedCells.Add(cell);
-                    AlreadyChecked.Add(cell);
-                    continue;
-                }*/
-
                 int passedValue = GetValueOfShorterPath(currentPathCell.Position, cell.Position) + currentPathCell.PathfindingCell.PassedPathValue;
 
                 int leftValue = GetValueOfShorterPath(cell.Position, endPosition);
 
+                if (SettedCells.Contains(cell) && (passedValue + leftValue) > cell.PathfindingCell.AllPathValue)
+                    continue;
+
                 cell.PathfindingCell.SetValues(passedValue, passedValue + leftValue, leftValue);
-                
+
                 cell.PathfindingCell.LastCell = currentPathCell.PathfindingCell;
 
                 cell.PathfindingCell.lastCellCheck = currentPathCell;
@@ -81,20 +80,20 @@ public class PathfindingSearcher
 
         }
 
-        counter = 0;
-
-        while (currentPathCell.Position != startPosition)
+        List<Cell> path = new();
+        path.Add(currentPathCell);
+        currentPathCell.MakeCellPath();
+        do
         {
-            counter++;
-            if (counter >= ForNoEternity)
-            {
-                Debug.Log("fuck");
-                break;
-            }
-
-            currentPathCell.MakeCellPath();
             currentPathCell = currentPathCell.PathfindingCell.lastCellCheck;
+            currentPathCell.MakeCellPath();
+            path.Add(currentPathCell);
         }
+        while (currentPathCell.Position != startPosition);
+
+        path.Reverse();
+
+        return path;
 
     }
 
@@ -112,9 +111,8 @@ public class PathfindingSearcher
         {
             cells.Remove(item);
         }
-        
-    }
 
+    }
 
     public Cell FindSmallestAllValue()
     {

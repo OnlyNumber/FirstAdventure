@@ -55,13 +55,18 @@ public class GridController : MonoBehaviour
         AllCells.Clear();
     }
 
+    [ContextMenu("Recreate")]
+    public void Recreate()
+    {
+        ClearGrid();
+
+        CreateGrid();
+    }
+
     public Cell GetCell(int x, int y)
     {
         if (x < 0 || y < 0 || x >= GRID_WIDTH || y >= GRID_HIGHT)
-        {
-            //Debug.LogError("Wrong cell [" + x + "][" + y + "] returning null");
             return null;
-        }
 
         return AllCells[x + y * GRID_WIDTH];
     }
@@ -77,6 +82,7 @@ public class GridController : MonoBehaviour
 
 
     }
+    
     [ContextMenu("First Cell Check")]
     public void FirstCellCheck()
     {

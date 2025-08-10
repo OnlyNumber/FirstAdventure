@@ -37,7 +37,7 @@ public class Cell : MonoBehaviour
 
     public void ClearTexts()
     {
-        if(meshRenderer.material != Obstacle)
+        if(!PathfindingCell.IsObstacle)
         meshRenderer.material = Default;
 
         PathfindingCell.SetTextActivity(false);

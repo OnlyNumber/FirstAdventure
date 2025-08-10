@@ -298,7 +298,7 @@ MonoBehaviour:
   CharacterPoint: {fileID: 8708197460700629144}
   Position: {x: 0, y: 0}
   meshRenderer: {fileID: 2459843459614625472}
-  Default: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  Default: {fileID: 2100000, guid: 46f19aadb19791e439fda78ed2c23389, type: 2}
   Obstacle: {fileID: 2100000, guid: d86674bc6a6da0d4e8aec09e01dc3feb, type: 2}
   Path: {fileID: 2100000, guid: b19d919ea635c614da938e7ff3d24293, type: 2}
 --- !u!1 &3000139469927616680
@@ -528,7 +528,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 46f19aadb19791e439fda78ed2c23389, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
