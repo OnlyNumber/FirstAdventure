@@ -67,9 +67,6 @@ public class FastCasino : MonoBehaviour
         randomResult = Random.Range(0, 4);
 
         CurrentSpeed = SmoothSpeed;
-
-        
-
     }
 
     public IEnumerator SmoothStop()
