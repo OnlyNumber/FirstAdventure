@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class GridController : MonoBehaviour
+public class SquareGrid : MonoBehaviour, Grid
 {
     public const int GRID_WIDTH = 20;
     public const int GRID_HIGHT = 10;
@@ -44,7 +44,7 @@ public class GridController : MonoBehaviour
         }
     }
 
-    [ContextMenu("Clear grid")]
+    [ContextMenu("Delete grid")]
     public void ClearGrid()
     {
         foreach (var item in AllCells)
@@ -86,7 +86,7 @@ public class GridController : MonoBehaviour
     [ContextMenu("First Cell Check")]
     public void FirstCellCheck()
     {
-        pathfindingSearcher.SetAllValues(StartPoint, SearchPoint);
+        PathfindingSystem.PathfindingSearcher.SetAllValues(this, StartPoint, SearchPoint);
     }
 
     [ContextMenu("Clear All Text")]

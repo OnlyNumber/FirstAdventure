@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,18 +8,18 @@ public class PathfindingSearcher
 
     public const int Diagonal_Value = 14;
 
-    public GridController gridController;
+    public Grid gridController;
 
     public List<Cell> SettedCells = new();
     public List<Cell> AlreadyChecked = new();
 
-
     public int ForNoEternity = 150;
 
-    public List<Cell> SetAllValues(Vector2 startPosition, Vector2 endPosition)
+    public List<Cell> SetAllValues(Grid grid, Vector2 startPosition, Vector2 endPosition)
     {
-        int counter = 0;
+        gridController = grid;
 
+        int counter = 0;
 
         ///InitializeFirstCell
         SettedCells.Clear();
