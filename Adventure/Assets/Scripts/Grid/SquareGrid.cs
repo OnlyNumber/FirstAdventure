@@ -12,12 +12,6 @@ public class SquareGrid : MonoBehaviour, Grid
 
     public List<Cell> AllCells = new();
 
-    public PathfindingSearcher pathfindingSearcher = new();
-
-    public Vector2 StartPoint;
-
-    public Vector2 SearchPoint;
-
     [ContextMenu("Create grid")]
     public void CreateGrid()
     {
@@ -37,7 +31,7 @@ public class SquareGrid : MonoBehaviour, Grid
 
                 cell.name = CellPrefab.name;
 
-                cell.Position = new Vector2(x, y);
+                cell.Position = new Vector2Int(x, y);
 
                 AllCells.Add(cell);
             }
@@ -71,23 +65,10 @@ public class SquareGrid : MonoBehaviour, Grid
         return AllCells[x + y * GRID_WIDTH];
     }
 
-    public Cell GetCell(Vector2 position)
-    {
-        return GetCell((int)position.x, (int)position.y);
-    }
-
-    public Vector2 GetPositionOfCell(Cell cell)
-    {
-        return cell.Position;
+    public Cell GetCell(Vector2Int position) => GetCell(position.x, position.y);
 
 
-    }
-    
-    [ContextMenu("First Cell Check")]
-    public void FirstCellCheck()
-    {
-        PathfindingSystem.PathfindingSearcher.SetAllValues(this, StartPoint, SearchPoint);
-    }
+    public Vector2Int GetPositionOfCell(Cell cell) => cell.Position;
 
     [ContextMenu("Clear All Text")]
     public void ClearAllText()
@@ -95,6 +76,18 @@ public class SquareGrid : MonoBehaviour, Grid
         foreach (var item in AllCells)
         {
             item.ClearTexts();
+        }
+    }
+    
+    public void Clear()
+    {
+        foreach (var item in AllCells)
+        {
+            item.PathfindingCell.SetValues(0, 0, 0);
+
+            item.PathfindingCell.LastCell = null;
+
+            item.PathfindingCell.lastCellCheck = null;
         }
     }
 }

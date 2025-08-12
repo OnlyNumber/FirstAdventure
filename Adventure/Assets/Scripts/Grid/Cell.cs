@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
-    public PathfindingCell PathfindingCell;
+    public PathfindingCell PathfindingCell = new();
 
     public Vector2 CellSize = new Vector2(2, 2);
 
     public Transform CharacterPoint;
 
-    public Vector2 Position;
+    public Vector2Int Position;
 
     public MeshRenderer meshRenderer;
 
@@ -19,6 +19,8 @@ public class Cell : MonoBehaviour
     public Material Obstacle;
 
     public Material Path;
+
+    public Material AllPath;
 
 
     [ContextMenu("MakeCellObstacle")]
@@ -33,6 +35,11 @@ public class Cell : MonoBehaviour
     public void MakeCellPath()
     {
         meshRenderer.material = Path;
+    }
+
+    public void MakeAllCellPath()
+    {
+        meshRenderer.material = AllPath;
     }
 
     public void ClearTexts()

@@ -6,6 +6,7 @@ public interface Grid
 {
     public abstract Cell GetCell(int x, int y);
 
-    public abstract Cell GetCell(Vector2 position);
+    public abstract Cell GetCell(Vector2Int position);
 
+    public abstract void Clear();
 }
