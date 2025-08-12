@@ -27,7 +27,7 @@ public static class PathfindingSystem
 
                 currentPath = PathfindingSearcher.GetPath(grid, startPosition, startPosition + new Vector2Int(x, y));
 
-                if (currentPath != null && currentPath.Count <= radius)
+                if (currentPath != null && currentPath.Count <= radius - 1)
                 {
                     foreach (var item in currentPath)
                     {
@@ -53,51 +53,45 @@ public static class PathfindingSystem
 
     }
 
-    public static IEnumerator GetAllPathesFuck(Grid grid, Vector2Int startPosition, int radius)
+    private static (int dy, int dx)[] directions = new (int, int)[]
     {
-        List<Cell> getAllCells = new();
+        (-1, 0), (1, 0), (0, -1), (0, 1)
+    };
 
-        List<Cell> currentPath;
+    public static HashSet<(int, int)> BFSMovement(Grid grid, (int, int) start, int maxMove)
+    {
+        var visited = new Dictionary<(int, int), int>();
+        var reachable = new HashSet<(int, int)>();
 
-        int yRadius = 0;
+        var queue = new Queue<((int, int) pos, int cost)>();
+        queue.Enqueue((start, 0));
+        visited[start] = 0;
 
-        for (int x = -radius; x <= radius; x++)
+        while (queue.Count > 0)
         {
-            yRadius = radius - Mathf.Abs(x);
+            var (pos, cost) = queue.Dequeue();
+            reachable.Add(pos);
 
-            for (int y = -yRadius; y <= yRadius; y++)
+            foreach (var (dy, dx) in directions)
             {
-                if (getAllCells.Contains(grid.GetCell(x, y)))
-                    continue;
+                int ny = pos.Item1 + dy;
+                int nx = pos.Item2 + dx;
+                int newCost = cost + 1;
 
-                currentPath = PathfindingSearcher.GetPath(grid, startPosition, startPosition + new Vector2Int(x, y));
 
-                if (currentPath.Count > radius)
-                    Debug.Log("path " + currentPath.Count);
-
-                if (currentPath != null && currentPath.Count <= radius)
+                if (grid.GetCell(ny, nx) != null && grid.GetCell(ny, nx).PathfindingCell.IsObstacle == false && newCost <= maxMove)
                 {
-
-
-                    foreach (var item in currentPath)
+                    if (!visited.ContainsKey((ny, nx)) || newCost < visited[(ny, nx)])
                     {
-                        if (!getAllCells.Contains(item))
-                        {
-                            getAllCells.Add(item);
-                        }
+                        visited[(ny, nx)] = newCost;
+                        queue.Enqueue(((ny, nx), newCost));
                     }
                 }
+
             }
-
-            foreach (var item in getAllCells)
-            {
-                item.MakeAllCellPath();
-            }
-
-
-            yield return new WaitForSeconds(1);
         }
 
-
+        return reachable;
     }
+
 }

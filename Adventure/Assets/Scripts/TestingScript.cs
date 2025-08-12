@@ -16,18 +16,14 @@ public class TestingScript : MonoBehaviour
         PathfindingSystem.PathfindingSearcher.GetPath(squareGridl, StartPoint, SearchPoint);
     }
 
-    [ContextMenu("Search Path Coroutine")]
-    public void SearchPathCoroutine()
-    {
-        StartCoroutine(PathfindingSystem.PathfindingSearcher.GetPathFuck(squareGridl, StartPoint, SearchPoint));
-    }
-
-
     [ContextMenu("Get All Paths From Point")]
     public void GetAllPathsFromPoint()
     {
-        //StartCoroutine(PathfindingSystem.GetAllPathesFuck(squareGridl, StartPoint, PathSearchRadius));
+        //PathfindingSystem.GetAllPathes(squareGridl, StartPoint, PathSearchRadius);
 
-        PathfindingSystem.GetAllPathes(squareGridl, StartPoint, PathSearchRadius);
+        foreach (var item in PathfindingSystem.BFSMovement(squareGridl, (StartPoint.x, StartPoint.y), PathSearchRadius))
+        {
+            squareGridl.GetCell(item.Item1,item.Item2).MakeAllCellPath();
+        }
     }
 }
