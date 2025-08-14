@@ -15,7 +15,7 @@ public class SquareGrid : MonoBehaviour, Grid
     [ContextMenu("Create grid")]
     public void CreateGrid()
     {
-        float initialHight = GRID_HIGHT * CellPrefab.CellSize.y;
+        float initialHight = (GRID_HIGHT - 1) * CellPrefab.CellSize.y;
 
         Cell cell;
 
@@ -67,7 +67,6 @@ public class SquareGrid : MonoBehaviour, Grid
 
     public Cell GetCell(Vector2Int position) => GetCell(position.x, position.y);
 
-
     public Vector2Int GetPositionOfCell(Cell cell) => cell.Position;
 
     [ContextMenu("Clear All Text")]
@@ -77,6 +76,8 @@ public class SquareGrid : MonoBehaviour, Grid
         {
             item.ClearTexts();
         }
+
+        Clear();
     }
     
     public void Clear()

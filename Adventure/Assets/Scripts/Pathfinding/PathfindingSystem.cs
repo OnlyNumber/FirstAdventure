@@ -6,53 +6,6 @@ public static class PathfindingSystem
 {
     public static PathfindingSearcher PathfindingSearcher = new();
 
-    public static void GetAllPathes(Grid grid, Vector2Int startPosition, int radius)
-    {
-        List<Cell> getAllCells = new();
-
-        List<Cell> currentPath = new();
-
-        int yRadius = 0;
-
-        for (int x = -radius; x <= radius; x++)
-        {
-            yRadius = radius - Mathf.Abs(x);
-
-            for (int y = -yRadius; y <= yRadius; y++)
-            {
-                if (getAllCells.Contains(grid.GetCell(x, y)))
-                    continue;
-
-                currentPath.Clear();
-
-                currentPath = PathfindingSearcher.GetPath(grid, startPosition, startPosition + new Vector2Int(x, y));
-
-                if (currentPath != null && currentPath.Count <= radius - 1)
-                {
-                    foreach (var item in currentPath)
-                    {
-                        if (!getAllCells.Contains(item))
-                        {
-                            getAllCells.Add(item);
-                        }
-                    }
-                }
-                else
-                {
-                    currentPath = new();
-                }
-            }
-
-            foreach (var item in getAllCells)
-            {
-                item.MakeAllCellPath();
-            }
-
-        }
-
-
-    }
-
     private static (int dy, int dx)[] directions = new (int, int)[]
     {
         (-1, 0), (1, 0), (0, -1), (0, 1)

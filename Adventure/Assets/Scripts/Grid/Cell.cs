@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Cell : MonoBehaviour
@@ -12,16 +10,16 @@ public class Cell : MonoBehaviour
 
     public Vector2Int Position;
 
+    public GridObject CellGridObject;
+
     public MeshRenderer meshRenderer;
 
+    #region ChangeMaterial
     public Material Default;
-
     public Material Obstacle;
-
     public Material Path;
-
     public Material AllPath;
-
+    #endregion
 
     [ContextMenu("MakeCellObstacle")]
     public void MakeCellObstacle()

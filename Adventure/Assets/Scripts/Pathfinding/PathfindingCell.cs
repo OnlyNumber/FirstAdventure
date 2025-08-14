@@ -6,17 +6,15 @@ using TMPro;
 [System.Serializable]
 public class PathfindingCell
 {
+    #region Path Values
     public TMP_Text PassedPass;
-
     public TMP_Text AllPass;
-
     public TMP_Text LeftPass;
 
     public int PassedPathValue;
-
     public int AllPathValue;
-
     public int LeftPathValue;
+    #endregion
 
     [field: SerializeField] public PathfindingCell LastCell;
 
@@ -34,9 +32,6 @@ public class PathfindingCell
 
         LeftPathValue = left;
         LeftPass.text = left.ToString();
-
-        SetTextActivity(true);
-
     }
     
     public void SetTextActivity(bool textState)
