@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class TestingScript : MonoBehaviour
 {
+    public static TestingScript Instance;
+
     public SquareGrid squareGridl;
 
     public Vector2Int StartPoint;
@@ -10,6 +12,14 @@ public class TestingScript : MonoBehaviour
     public int PathSearchRadius;
 
     public Hero HeroPrefab;
+
+    private void Start()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
 
     [ContextMenu("Search Path")]
     public void SearchPath()
@@ -21,12 +31,12 @@ public class TestingScript : MonoBehaviour
     public void GetAllPathsFromPoint()
     {
         foreach (var item in PathfindingSystem.BFSMovement(squareGridl, (StartPoint.x, StartPoint.y), PathSearchRadius))
-            squareGridl.GetCell(item.Item1,item.Item2).MakeAllCellPath();
+            squareGridl.GetCell(item.Item1, item.Item2).MakeAllCellPath();
     }
 
     [ContextMenu("Spawn hero")]
     public void SpawnHero()
     {
-        
+
     }
 }

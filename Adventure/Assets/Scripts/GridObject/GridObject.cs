@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GridObject : MonoBehaviour
 {
-    
+    public virtual void CellAction()
+    {
+        Debug.Log("Cell Action");
+    }
 }

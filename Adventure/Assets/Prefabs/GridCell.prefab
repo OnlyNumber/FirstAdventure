@@ -532,6 +532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7114427748949613335}
   - component: {fileID: -7427337123302940624}
+  - component: {fileID: 2400850936387996357}
   m_Layer: 0
   m_Name: GridCell
   m_TagString: Untagged
@@ -582,11 +583,33 @@ MonoBehaviour:
   CellSize: {x: 2, y: 2}
   CharacterPoint: {fileID: 8708197460700629144}
   Position: {x: 0, y: 0}
+  CellGridObject: {fileID: 0}
   meshRenderer: {fileID: 2459843459614625472}
   Default: {fileID: 2100000, guid: 46f19aadb19791e439fda78ed2c23389, type: 2}
   Obstacle: {fileID: 2100000, guid: d86674bc6a6da0d4e8aec09e01dc3feb, type: 2}
   Path: {fileID: 2100000, guid: b19d919ea635c614da938e7ff3d24293, type: 2}
   AllPath: {fileID: 2100000, guid: b0b709ab40bfa82448f8891f35396029, type: 2}
+--- !u!65 &2400850936387996357
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2877233189047201408}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 0.1, z: 2}
+  m_Center: {x: 1, y: 0, z: 1}
 --- !u!1 &3000139469927616680
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,7 +786,6 @@ GameObject:
   - component: {fileID: 5794811276067847518}
   - component: {fileID: 2450596458029869008}
   - component: {fileID: 2459843459614625472}
-  - component: {fileID: 5581161322248812351}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -836,28 +858,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5581161322248812351
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5518475859823725810}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &7176148948557786354
 GameObject:
   m_ObjectHideFlags: 0

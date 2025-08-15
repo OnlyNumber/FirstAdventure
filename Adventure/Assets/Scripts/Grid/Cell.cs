@@ -19,7 +19,6 @@ public class Cell : MonoBehaviour
     public Material Obstacle;
     public Material Path;
     public Material AllPath;
-    #endregion
 
     [ContextMenu("MakeCellObstacle")]
     public void MakeCellObstacle()
@@ -40,12 +39,30 @@ public class Cell : MonoBehaviour
         meshRenderer.material = AllPath;
     }
 
+    #endregion
+
     public void ClearTexts()
     {
         if(!PathfindingCell.IsObstacle)
         meshRenderer.material = Default;
 
         PathfindingCell.SetTextActivity(false);
+
+    }
+
+    public bool ActivateCell()
+    {
+        if (CellGridObject == null)
+        {
+            Debug.Log("No activated cell on " + Position);
+            return false;
+        }
+
+
+        CellGridObject.CellAction();
+
+
+        return true;
 
     }
 }
